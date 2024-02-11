@@ -6,7 +6,7 @@ import Main from "@/features/table/Table.js";
 function App() {
 	return (
 		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-			<main className="flex relative min-w-screen min-h-screen bg-background">
+			<main className="flex relative min-w-screen min-h-screen bg-background overflow-hidden">
 				<Navigation />
 				<Main />
 				<div className="absolute bottom-2 right-2">

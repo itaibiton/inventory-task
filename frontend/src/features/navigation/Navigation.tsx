@@ -13,7 +13,7 @@ function Navigation() {
 	}, [items]);
 
 	return (
-		<nav className="bg-secondary drop-shadow-lg min-w-fit w-40 p-4">
+		<nav className="bg-secondary drop-shadow-lg min-w-fit w-60 p-4">
 			{loading.items ? (
 				<Loader2 className="w-4 h-4 animate-spin" />
 			) : (

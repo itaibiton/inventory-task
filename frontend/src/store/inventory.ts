@@ -5,7 +5,7 @@ interface Item {
     name: string;
     quantity: number;
 }
-interface Product {
+export interface Product {
     id: number;
     name: string;
     description: string;
