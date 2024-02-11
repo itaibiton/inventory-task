@@ -1,0 +1,108 @@
+[
+    {
+      "name": "Bike",
+      "description": "Mountain bike",
+      "price": 300,
+      "attributes": {
+        "color": "red",
+        "size": "M"
+      }
+    },
+    {
+      "name": "Bike",
+      "description": "Desert bike",
+      "price": 200,
+      "attributes": {
+        "color": "blue",
+        "size": "L"
+      }
+    },
+    {
+      "name": "Bike",
+      "description": "Snow bike",
+      "price": 1500,
+      "attributes": {
+        "color": "white",
+        "size": "XL"
+      }
+    },
+    {
+      "name": "Bike",
+      "description": "Road bike",
+      "price": 3500,
+      "attributes": {
+        "color": "yellow",
+        "size": "XL"
+      }
+    },
+    {
+      "name": "Toaster",
+      "description": "Electric toaster",
+      "price": 45,
+      "attributes": {
+        "capacity": "4 slices",
+        "voltage": "120V"
+      }
+    },
+    {
+      "name": "Toaster",
+      "description": "Electric toaster",
+      "price": 65,
+      "attributes": {
+        "capacity": "6 slices",
+        "voltage": "150V"
+      }
+    },
+    {
+      "name": "Toaster",
+      "description": "Electric toaster",
+      "price": 85,
+      "attributes": {
+        "capacity": "8 slices",
+        "voltage": "180V"
+      }
+    },
+    {
+      "name": "Keyboard",
+      "description": "Mechanical keyboard",
+      "price": 125,
+      "attributes": {
+        "connection": "wireless",
+        "os": "windows"
+      }
+    },
+    {
+      "name": "Keyboard",
+      "description": "Mechanical keyboard",
+      "price": 155,
+      "attributes": {
+        "connection": "wired",
+        "os": "windows"
+      }
+    },
+    {
+      "name": "Keyboard",
+      "description": "Mechanical keyboard",
+      "price": 200,
+      "attributes": {
+        "connection": "wireless",
+        "os": "mac"
+      }
+    },
+    {
+      "name": "Gum",
+      "description": "Chewing Gum",
+      "price": 30
+    },
+    {
+      "name": "Gum",
+      "description": "Chewing Gum",
+      "price": 10
+    },
+    {
+      "name": "Gum",
+      "description": "Chewing Gum",
+      "price": 20
+    }
+  ]
+  
