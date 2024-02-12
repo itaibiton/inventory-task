@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator.js";
 import Pagination from "@/features/table/Pagination.js";
 import { TableColumn, TableProps } from "@/features/table/types.js";
 import useStore, { Product } from "@/store/inventory.js";
-import { Loader2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const getDynamicColumns = (products: Product[]): TableColumn[] => {
@@ -169,7 +169,21 @@ function Main() {
 										key={column.key} // Use column.key for the key prop
 										onClick={() => handleSort(column.header)}
 									>
-										{column.header.toUpperCase()}
+										<div className="flex items-center gap-1">
+											{column.header.toUpperCase()}
+											{column.header.toLowerCase() ===
+											tableData.sort.toLowerCase() ? (
+												<>
+													{tableData.sortDir === "asc" ? (
+														<ChevronUp />
+													) : (
+														<ChevronDown />
+													)}
+												</>
+											) : (
+												""
+											)}
+										</div>
 									</th>
 								))}
 							</tr>
