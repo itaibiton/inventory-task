@@ -22,10 +22,18 @@ interface StoreState {
     updateItems: () => Promise<void>;
     updateProducts: (queryString: string) => Promise<void>;
     updateActive: (name: string) => void;
+    updateDistinctValues: (name: string) => void;
+    error: string,
     loading: {
         items: boolean,
         products: boolean
     },
+    distinctValues: {
+        productName: string,
+        distinctValues: {
+            [key: string]: string[] | number[]
+        }
+    }
     total: number,
     activeProduct: string
 }
@@ -37,8 +45,13 @@ const useStore = create<StoreState>((set, get) => ({
         items: true,
         products: true
     },
+    error: '',
     total: 0,
     activeProduct: '',
+    distinctValues: {
+        productName: '',
+        distinctValues: {}
+    },
     updateItems: async () => {
         try {
             const response = await fetch(`http://localhost:3000/products/quantities`);
@@ -60,6 +73,7 @@ const useStore = create<StoreState>((set, get) => ({
                     ...state.loading,
                     items: false
                 },
+                error: error?.toString()
             }))
         }
     },
@@ -81,7 +95,34 @@ const useStore = create<StoreState>((set, get) => ({
             }
         } catch (error) {
             console.error('Failed to update products:', error);
-            set((state) => ({ loading: { ...state.loading, products: false } }))
+            set((state) => ({
+                loading: { ...state.loading, products: false },
+                error: error?.toString()
+
+            }))
+        }
+    },
+    updateDistinctValues: async (name: string) => {
+        try {
+            const response = await fetch(`http://localhost:3000/products/distinct-values/${name}`);
+            if (response.ok) {
+                const data = await response.json();
+                set((state) => ({
+                    distinctValues: {
+                        productName: name,
+                        distinctValues: data.distinctValues
+                    }
+                }))
+            }
+        } catch (error) {
+            console.error('Failed to update distinct values:', error);
+            set((state) => ({
+                loading: {
+                    ...state.loading,
+                    products: false
+                },
+                error: error?.toString()
+            }))
         }
     },
     updateActive: (name: string) => set((state) => ({ ...state, activeProduct: name }))
