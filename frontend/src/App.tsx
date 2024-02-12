@@ -1,7 +1,7 @@
 import { ModeToggle } from "@/components/ui/mode-toggle.js";
 import { ThemeProvider } from "@/components/ui/theme-provider.js";
 import Navigation from "@/features/navigation/Navigation.js";
-import Main from "@/features/table/Table.js";
+import Main from "@/features/table/Main.js";
 
 function App() {
 	return (

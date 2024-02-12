@@ -3,7 +3,10 @@ import { Product } from "@/store/inventory.js";
 export interface TableProps {
     skip: number,
     take: number,
+    clickedCount: number,
     filter: string,
+    sort: string,
+    sortDir: 'asc' | 'desc' | ''
 }
 
 export interface TableColumn {

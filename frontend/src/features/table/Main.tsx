@@ -61,28 +61,88 @@ function Main() {
 		name: string,
 		skip: number,
 		take: number,
+		sort: string,
+		sortDir: "asc" | "desc" | "",
 		filter: string
-	) =>
-		`${
-			activeProduct
-				? `name=${name}&skip=${skip}&take=${take}${filter ? `&${filter}}` : ""}`
-				: ""
+	) => {
+		let queryString = `${
+			activeProduct ? `name=${name}&skip=${skip}&take=${take}` : ""
 		}`;
+
+		if (sort && sortDir) {
+			queryString += `&sort=${sort}:${sortDir}`;
+		}
+
+		if (filter) {
+			queryString += `&${filter}`;
+		}
+
+		return queryString;
+	};
 
 	const [tableData, setTableData] = useState<TableProps>({
 		skip: 0,
 		take: 3,
-		filter: createQueryString(activeProduct, 0, 0, ""),
+		filter: createQueryString(activeProduct, 0, 0, "", "", ""),
+		sort: "",
+		sortDir: "",
+		clickedCount: 0,
 	});
+
+	const handleSort = (header: string) => {
+		// If the sort direction is already ascending for this column
+		if (
+			tableData.sort === header.toLowerCase() &&
+			tableData.sortDir === "asc"
+		) {
+			// Change to descending order
+			setTableData((prev) => ({
+				...prev,
+				sortDir: "desc",
+			}));
+		} else if (
+			tableData.sort === header.toLowerCase() &&
+			tableData.sortDir === "desc"
+		) {
+			// Reset sorting
+			setTableData((prev) => ({
+				...prev,
+				sort: "",
+				sortDir: "",
+				clickedCount: 0,
+			}));
+		} else {
+			// Change to ascending order
+			setTableData((prev) => ({
+				...prev,
+				sort: header.toLowerCase(),
+				sortDir: "asc",
+				clickedCount: (prev.clickedCount || 0) + 1,
+			}));
+		}
+	};
 
 	useEffect(() => {
 		if (activeProduct !== "") {
 			setTableData((prev) => ({
 				...prev,
-				filter: createQueryString(activeProduct, prev.skip, prev.take, ""),
+				filter: createQueryString(
+					activeProduct,
+					prev.skip,
+					prev.take,
+					tableData.sort,
+					tableData.sortDir,
+					""
+				),
 			}));
 		}
-	}, [activeProduct, tableData.skip, tableData.take]);
+	}, [
+		activeProduct,
+		tableData.skip,
+		tableData.take,
+		tableData.sort,
+		tableData.sortDir,
+	]);
 
 	useEffect(() => {
 		if (tableData.filter) {
@@ -105,8 +165,9 @@ function Main() {
 							<tr>
 								{columns.map((column) => (
 									<th
-										className="text-start min-w-[120px] px-2 whitespace-nowrap"
+										className="text-start min-w-[120px] px-2 whitespace-nowrap cursor-pointer"
 										key={column.key} // Use column.key for the key prop
+										onClick={() => handleSort(column.header)}
 									>
 										{column.header.toUpperCase()}
 									</th>
