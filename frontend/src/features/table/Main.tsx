@@ -215,63 +215,72 @@ function Main() {
 					<table className="border-separate w-full">
 						<thead>
 							<tr>
-								{columns.map((column) => (
-									<th
-										className="text-start min-w-[120px] px-2 whitespace-nowrap cursor-pointer"
-										key={column.key} // Use column.key for the key prop
-									>
-										<div className="flex flex-row items-center">
-											<Button
-												variant="ghost"
-												className="flex text-start gap-1 p-0 h-fit"
-												onClick={() => handleSort(column.header)}
-											>
-												<>
-													{column.header.toUpperCase()}
-													{column.header.toLowerCase() ===
-													tableData.sort.toLowerCase() ? (
-														<>
-															{tableData.sortDir === "asc" ? (
-																<ChevronUp />
-															) : (
-																<ChevronDown />
-															)}
-														</>
-													) : (
-														<Minus className="opacity-0" />
-													)}
-												</>
-											</Button>
-											<Popover>
-												<PopoverTrigger>
-													<Filter className="h-4 w-4" />
-												</PopoverTrigger>
-												<PopoverContent>
-													{distinctValues.distinctValues[
-														column.header.toLowerCase()
-													].map((val: string | number, index) => (
-														<div
-															className="flex justify-between"
-															key={`${index}_${val}`}
-														>
-															{val}
-															<Checkbox
-																onCheckedChange={(e) =>
-																	// handleCheckbox(column.header, val)
-																	handleCheckbox(e, column.header, val)
-																}
-																checked={tableData.filter.includes(
-																	`${column.header.toLowerCase()}=${val}`
+								{columns &&
+									columns.length > 0 &&
+									columns.map((column) => (
+										<th
+											className="text-start min-w-[120px] px-2 whitespace-nowrap cursor-pointer"
+											key={column.key} // Use column.key for the key prop
+										>
+											<div className="flex flex-row items-center">
+												<Button
+													variant="ghost"
+													className="flex text-start gap-1 p-0 h-fit"
+													onClick={() => handleSort(column.header)}
+												>
+													<>
+														{column.header.toUpperCase()}
+														{column.header.toLowerCase() ===
+														tableData.sort.toLowerCase() ? (
+															<>
+																{tableData.sortDir === "asc" ? (
+																	<ChevronUp />
+																) : (
+																	<ChevronDown />
 																)}
-																className="rounded"
-															/>
-														</div>
-													))}
-												</PopoverContent>
-											</Popover>
-										</div>
-									</th>
-								))}
+															</>
+														) : (
+															<Minus className="opacity-0" />
+														)}
+													</>
+												</Button>
+												<Popover>
+													<PopoverTrigger>
+														<Filter className="h-4 w-4" />
+													</PopoverTrigger>
+													<PopoverContent>
+														{distinctValues.distinctValues &&
+															distinctValues.distinctValues[
+																column.header.toLowerCase()
+															] &&
+															distinctValues?.distinctValues[
+																column.header.toLowerCase()
+															].length > 0 &&
+															distinctValues.distinctValues[
+																column.header.toLowerCase()
+															].map((val: string | number, index) => (
+																<div
+																	className="flex justify-between"
+																	key={`${index}_${val}`}
+																>
+																	{val}
+																	<Checkbox
+																		onCheckedChange={(e) =>
+																			// handleCheckbox(column.header, val)
+																			handleCheckbox(e, column.header, val)
+																		}
+																		checked={tableData.filter.includes(
+																			`${column.header.toLowerCase()}=${val}`
+																		)}
+																		className="rounded"
+																	/>
+																</div>
+															))}
+													</PopoverContent>
+												</Popover>
+											</div>
+										</th>
+									))}
 							</tr>
 						</thead>
 						<tbody>
