@@ -26,6 +26,7 @@ interface StoreState {
         items: boolean,
         products: boolean
     },
+    total: number,
     activeProduct: string
 }
 
@@ -36,6 +37,7 @@ const useStore = create<StoreState>((set, get) => ({
         items: true,
         products: true
     },
+    total: 0,
     activeProduct: '',
     updateItems: async () => {
         try {
@@ -74,6 +76,7 @@ const useStore = create<StoreState>((set, get) => ({
                         ...state.loading,
                         products: false
                     },
+                    total: data.total
                 }))
             }
         } catch (error) {

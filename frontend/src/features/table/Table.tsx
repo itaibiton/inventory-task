@@ -1,8 +1,58 @@
 import { Separator } from "@/components/ui/separator.js";
-import { getUniqueColumns } from "@/lib/utils.js";
+import Pagination from "@/features/table/Pagination.js";
+import { TableColumn, TableProps } from "@/features/table/types.js";
 import useStore, { Product } from "@/store/inventory.js";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
+
+const getDynamicColumns = (products: Product[]): TableColumn[] => {
+	// Define custom formatters
+	const customFormatters: Record<string, (val: any) => React.ReactNode> = {
+		price: (val: number) => `$${val.toFixed(2)}`,
+		color: (val: string) => (
+			<div
+				className={`px-2 py-1 rounded min-w-full`}
+				style={{ background: val }}
+			>
+				{val}
+			</div>
+		),
+	};
+
+	// Start with common columns
+	let baseColumns: TableColumn[] = [
+		{ key: "name", header: "Name" },
+		{ key: "description", header: "Description" },
+		{ key: "price", header: "Price", formatter: customFormatters["price"] },
+	];
+
+	// Collect all unique attribute keys across products
+	const attributeKeys = new Set<string>();
+	products.forEach((product) => {
+		Object.keys(product.attributes || {}).forEach((attrKey) => {
+			attributeKeys.add(attrKey);
+		});
+	});
+
+	// Add columns for attributes with custom formatters if they exist in any product
+	attributeKeys.forEach((key) => {
+		if (customFormatters[key]) {
+			baseColumns.push({
+				key,
+				header: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize header
+				formatter: customFormatters[key],
+			});
+		} else {
+			// For attributes without custom formatters
+			baseColumns.push({
+				key,
+				header: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize header
+			});
+		}
+	});
+
+	return baseColumns;
+};
 
 function Main() {
 	const { activeProduct, updateProducts, loading, products } = useStore();
@@ -19,43 +69,46 @@ function Main() {
 				: ""
 		}`;
 
-	const [table, setTable] = useState({
+	const [tableData, setTableData] = useState<TableProps>({
 		skip: 0,
-		take: 5,
+		take: 3,
 		filter: createQueryString(activeProduct, 0, 0, ""),
 	});
 
 	useEffect(() => {
 		if (activeProduct !== "") {
-			setTable((prev) => ({
+			setTableData((prev) => ({
 				...prev,
 				filter: createQueryString(activeProduct, prev.skip, prev.take, ""),
 			}));
 		}
-	}, [activeProduct]);
+	}, [activeProduct, tableData.skip, tableData.take]);
 
 	useEffect(() => {
-		if (table.filter) {
-			updateProducts(table.filter);
+		if (tableData.filter) {
+			updateProducts(tableData.filter);
 		}
-	}, [table.filter]);
+	}, [tableData.filter]);
 
-	const columns = products.length > 0 ? getUniqueColumns(products) : [];
+	const columns: TableColumn[] = getDynamicColumns(products); // Assuming this function is already adjusted
 
 	return (
-		<div className="p-4  w-full">
+		<div className="p-4  w-full overflow-x-auto">
 			{loading.products ? (
 				<Loader2 className="w-4 h-4 animate-spin" />
 			) : (
-				<div className="flex flex-col w-full">
+				<div className="flex flex-col w-full min-w-fit overflow-x-auto">
 					<p className="text-xl">{activeProduct}</p>
 					<Separator className="my-2 w-full" />
-					<table className=" border-red-500">
+					<table className="border-separate w-full">
 						<thead>
 							<tr>
 								{columns.map((column) => (
-									<th className="text-start" key={column}>
-										{column.toUpperCase()}
+									<th
+										className="text-start min-w-[120px] px-2 whitespace-nowrap"
+										key={column.key} // Use column.key for the key prop
+									>
+										{column.header.toUpperCase()}
 									</th>
 								))}
 							</tr>
@@ -64,29 +117,32 @@ function Main() {
 							{products.map((product) => (
 								<tr key={product.id} className="hover:bg-secondary">
 									{columns.map((column) => {
-										// Handle rendering of product attributes safely
-										let content: React.ReactNode;
-										if (column in product) {
-											// Directly accessing known scalar properties of Product
-											content =
-												product[column as keyof Omit<Product, "attributes">];
-										} else if (
-											product.attributes &&
-											column in product.attributes
-										) {
-											// Accessing nested attributes if they exist
-											content = product.attributes[column];
-										} else {
-											// Fallback for undefined properties
-											content = null;
-										}
+										// Determine the cell's content
+										const rawValue =
+											column.key in product
+												? product[
+														column.key as keyof Omit<Product, "attributes">
+												  ]
+												: product.attributes?.[column.key];
+										const content = column.formatter
+											? column.formatter(rawValue, product)
+											: rawValue;
 
-										return <td key={`${product.id}-${column}`}>{content}</td>;
+										return (
+											<td
+												className="min-w-fit px-2 whitespace-nowrap"
+												key={`${product.id}-${column.key}`} // Use column.key for the key prop
+											>
+												{content}
+											</td>
+										);
 									})}
 								</tr>
 							))}
 						</tbody>
 					</table>
+
+					<Pagination tableData={tableData} setTableData={setTableData} />
 				</div>
 			)}
 		</div>
