@@ -42,7 +42,7 @@ function Pagination({ tableData, setTableData }: PaginationProps) {
 	};
 
 	const handleLimitChange = (e: number | string) => {
-		setTableData((prev) => ({ ...prev, take: Number(e) }));
+		setTableData((prev) => ({ ...prev, take: Number(e), skip: 0 }));
 	};
 
 	const currentPage = Math.floor(tableData.skip / tableData.take) + 1;

@@ -15,7 +15,7 @@ function Item({ item }: { item: { name: string; quantity: number } }) {
 		>
 			{item.name}{" "}
 			<span
-				className={`bg-primary px-1 py-0.5 rounded text-xs ${
+				className={`bg-primary w-6 h-6 min-w-fit p-1 flex items-center justify-center rounded text-xs ${
 					activeProduct === item.name ? "bg-white text-primary" : "text-white"
 				}`}
 			>
