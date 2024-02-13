@@ -1,7 +1,7 @@
 import Item from "@/features/navigation/Item.js";
 import useStore from "@/store/inventory.js";
 import { Loader2 } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 function Navigation() {
 	const { updateItems, items, loading } = useStore();
@@ -20,7 +20,7 @@ function Navigation() {
 				<ul className="flex gap-2 flex-col w-full">
 					{items &&
 						items.length > 0 &&
-						items.map((item, index) => <Item item={item} key={item.name} />)}
+						items.map((item) => <Item item={item} key={item.name} />)}
 				</ul>
 			)}
 		</nav>

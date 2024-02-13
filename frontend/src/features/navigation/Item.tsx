@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button.js";
 import useStore from "@/store/inventory.js";
-import React from "react";
 
 function Item({ item }: { item: { name: string; quantity: number } }) {
 	const { activeProduct, updateActive } = useStore();

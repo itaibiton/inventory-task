@@ -202,7 +202,7 @@ function Main() {
 		}
 	}, [tableData.query, distinctValues.productName]);
 
-	const columns: TableColumn[] = getDynamicColumns(products); // Assuming this function is already adjusted
+	const columns: TableColumn[] = getDynamicColumns(products);
 
 	if (error) return <>Error loading data</>;
 
@@ -222,7 +222,7 @@ function Main() {
 									columns.map((column) => (
 										<th
 											className="text-start min-w-[120px] px-2 whitespace-nowrap cursor-pointer"
-											key={column.key} // Use column.key for the key prop
+											key={column.key}
 										>
 											<div className="flex flex-row items-center">
 												<Button
@@ -268,7 +268,6 @@ function Main() {
 																	{val}
 																	<Checkbox
 																		onCheckedChange={(e) =>
-																			// handleCheckbox(column.header, val)
 																			handleCheckbox(e, column.header, val)
 																		}
 																		checked={tableData.filter.includes(
@@ -303,7 +302,7 @@ function Main() {
 										return (
 											<td
 												className="min-w-fit px-2 whitespace-nowrap"
-												key={`${product.id}-${column.key}`} // Use column.key for the key prop
+												key={`${product.id}-${column.key}`}
 											>
 												{content}
 											</td>

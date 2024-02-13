@@ -9,7 +9,7 @@ import {
 import { TableProps } from "@/features/table/types.js";
 import useStore from "@/store/inventory.js";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 
 interface PaginationProps {
 	tableData: TableProps;
