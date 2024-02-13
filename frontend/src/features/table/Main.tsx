@@ -89,7 +89,7 @@ function Main() {
 		}
 
 		if (filter) {
-			queryString += `&${filter}`;
+			queryString += `${filter}`;
 		}
 
 		return queryString;
@@ -169,29 +169,6 @@ function Main() {
 			updateDistinctValues(activeProduct);
 		}
 	}, [activeProduct]);
-
-	// useEffect(() => {
-	// 	if (activeProduct !== "" && tableData.skip !== 0) {
-	// 		setTableData((prev) => ({
-	// 			...prev,
-	// 			filter: createQueryString(
-	// 				activeProduct,
-	// 				prev.skip,
-	// 				prev.take,
-	// 				tableData.sort,
-	// 				tableData.sortDir,
-	// 				""
-	// 			),
-	// 		}));
-	// 	}
-	// }, [
-	// 	activeProduct,
-	// 	tableData.skip,
-	// 	tableData.take,
-	// 	tableData.sort,
-	// 	tableData.sortDir,
-	// 	tableData.query
-	// ]);
 
 	useEffect(() => {
 		if (activeProduct !== "") {
