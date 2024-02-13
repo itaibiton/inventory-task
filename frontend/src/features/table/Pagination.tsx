@@ -42,7 +42,6 @@ function Pagination({ tableData, setTableData }: PaginationProps) {
 	};
 
 	const handleLimitChange = (e: number | string) => {
-		// console.log("e", e);
 		setTableData((prev) => ({ ...prev, take: Number(e) }));
 	};
 
@@ -71,11 +70,6 @@ function Pagination({ tableData, setTableData }: PaginationProps) {
 				>
 					<ChevronRight onClick={handleNext} />
 				</Button>
-				{/* <select onChange={handleLimitChange} value={tableData.take}>
-					<option value={3}>3</option>
-					<option value={5}>5</option>
-					<option value={10}>10</option>
-				</select> */}
 				<Select
 					onValueChange={handleLimitChange}
 					value={tableData.take.toString()}

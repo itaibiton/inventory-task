@@ -98,7 +98,8 @@ function Main() {
 	const [tableData, setTableData] = useState<TableProps>({
 		skip: 0,
 		take: 3,
-		filter: createQueryString(activeProduct, 0, 0, "", "", ""),
+		query: createQueryString(activeProduct, 0, 3, "", "", ""),
+		filter: "",
 		sort: "",
 		sortDir: "",
 		clickedCount: 0,
@@ -154,10 +155,12 @@ function Main() {
 			updatedFilter = updatedFilter.replace(filterParam, "");
 		}
 
-		// Update the tableData state with the new filter
+		console.log("new filter:", updatedFilter);
+
 		setTableData((prev) => ({
 			...prev,
 			filter: updatedFilter,
+			skip: 0,
 		}));
 	};
 
@@ -167,38 +170,60 @@ function Main() {
 		}
 	}, [activeProduct]);
 
+	// useEffect(() => {
+	// 	if (activeProduct !== "" && tableData.skip !== 0) {
+	// 		setTableData((prev) => ({
+	// 			...prev,
+	// 			filter: createQueryString(
+	// 				activeProduct,
+	// 				prev.skip,
+	// 				prev.take,
+	// 				tableData.sort,
+	// 				tableData.sortDir,
+	// 				""
+	// 			),
+	// 		}));
+	// 	}
+	// }, [
+	// 	activeProduct,
+	// 	tableData.skip,
+	// 	tableData.take,
+	// 	tableData.sort,
+	// 	tableData.sortDir,
+	// 	tableData.query
+	// ]);
+
 	useEffect(() => {
 		if (activeProduct !== "") {
 			setTableData((prev) => ({
 				...prev,
-				filter: createQueryString(
+				query: createQueryString(
 					activeProduct,
-					prev.skip,
-					prev.take,
+					tableData.skip,
+					tableData.take,
 					tableData.sort,
 					tableData.sortDir,
-					""
+					tableData.filter
 				),
 			}));
 		}
 	}, [
-		activeProduct,
+		distinctValues.productName,
 		tableData.skip,
 		tableData.take,
 		tableData.sort,
 		tableData.sortDir,
+		tableData.filter,
 	]);
 
 	useEffect(() => {
 		if (
-			tableData.filter &&
+			tableData.query &&
 			activeProduct.toLowerCase() === distinctValues.productName.toLowerCase()
 		) {
-			console.log("active product", activeProduct);
-			console.log("disctincst product", distinctValues);
-			updateProducts(tableData.filter);
+			updateProducts(tableData.query);
 		}
-	}, [tableData.filter, distinctValues.productName]);
+	}, [tableData.query, distinctValues.productName]);
 
 	const columns: TableColumn[] = getDynamicColumns(products); // Assuming this function is already adjusted
 

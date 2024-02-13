@@ -5,6 +5,7 @@ export interface TableProps {
     take: number,
     clickedCount: number,
     filter: string,
+    query: string,
     sort: string,
     sortDir: 'asc' | 'desc' | ''
 }
