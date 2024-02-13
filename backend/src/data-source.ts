@@ -25,9 +25,7 @@ async function seedDatabase() {
             product.name = productData.name;
             product.description = productData.description;
             product.price = productData.price;
-            // if (product.attributes) {
             product.attributes = productData.attributes;
-            // }
 
             await productRepository.save(product);
         }

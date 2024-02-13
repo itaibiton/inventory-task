@@ -1,108 +1,229 @@
 [
-    {
+  {
       "name": "Bike",
       "description": "Mountain bike",
       "price": 300,
       "attributes": {
-        "color": "red",
-        "size": "M"
+          "color": "red",
+          "size": "M",
+          "type": "Mountain"
       }
-    },
-    {
+  },
+  {
       "name": "Bike",
       "description": "Desert bike",
       "price": 200,
       "attributes": {
-        "color": "blue",
-        "size": "L"
+          "color": "blue",
+          "size": "L",
+          "type": "Desert"
       }
-    },
-    {
+  },
+  {
       "name": "Bike",
       "description": "Snow bike",
       "price": 1500,
       "attributes": {
-        "color": "white",
-        "size": "XL"
+          "color": "white",
+          "size": "XL",
+          "type": "Snow"
       }
-    },
-    {
+  },
+  {
       "name": "Bike",
       "description": "Road bike",
       "price": 3500,
       "attributes": {
-        "color": "yellow",
-        "size": "XL"
+          "color": "yellow",
+          "size": "XL",
+          "type": "Road"
       }
-    },
-    {
-      "name": "Toaster",
-      "description": "Electric toaster",
-      "price": 45,
+  },
+  {
+      "name": "Bike",
+      "description": "Road bike",
+      "price": 2500,
       "attributes": {
-        "capacity": "4 slices",
-        "voltage": "120V"
+          "color": "blue",
+          "size": "XXL",
+          "type": "Road"
       }
-    },
-    {
-      "name": "Toaster",
-      "description": "Electric toaster",
-      "price": 65,
+  },
+  {
+      "name": "Bike",
+      "description": "Desert bike",
+      "price": 500,
       "attributes": {
-        "capacity": "6 slices",
-        "voltage": "150V"
+          "color": "green",
+          "size": "SM",
+          "type": "Desert"
       }
-    },
-    {
-      "name": "Toaster",
-      "description": "Electric toaster",
-      "price": 85,
+  },
+  {
+      "name": "Bike",
+      "description": "Road bike",
+      "price": 1300,
       "attributes": {
-        "capacity": "8 slices",
-        "voltage": "180V"
+          "color": "pink",
+          "size": "MD",
+          "type": "Road"
       }
-    },
-    {
+  },
+  {
+      "name": "Bike",
+      "description": "Road bike",
+      "price": 2500,
+      "attributes": {
+          "color": "purple",
+          "size": "LG",
+          "type": "Road"
+      }
+  },
+  {
+      "name": "Bike",
+      "description": "Snow bike",
+      "price": 1200,
+      "attributes": {
+          "color": "green",
+          "size": "XL",
+          "type": "Snow"
+      }
+  },
+  {
+      "name": "Bike",
+      "description": "Electric bike",
+      "price": 2000,
+      "attributes": {
+          "color": "black",
+          "size": "L",
+          "type": "Electric"
+      }
+  },
+  {
+      "name": "Bike",
+      "description": "City bike",
+      "price": 700,
+      "attributes": {
+          "color": "grey",
+          "size": "M",
+          "type": "City"
+      }
+  },
+  {
+      "name": "Bike",
+      "description": "BMX bike",
+      "price": 400,
+      "attributes": {
+          "color": "orange",
+          "size": "S",
+          "type": "BMX"
+      }
+  },
+  {
+      "name": "Bike",
+      "description": "Folding bike",
+      "price": 800,
+      "attributes": {
+          "color": "silver",
+          "size": "L",
+          "type": "Folding"
+      }
+  },
+  {
       "name": "Keyboard",
       "description": "Mechanical keyboard",
       "price": 125,
       "attributes": {
-        "connection": "wireless",
-        "os": "windows"
+          "connection": "wireless",
+          "os":"mac"
       }
-    },
-    {
+  },
+  {
       "name": "Keyboard",
       "description": "Mechanical keyboard",
       "price": 155,
       "attributes": {
-        "connection": "wired",
-        "os": "windows"
+          "connection": "wired",
+          "os":"windows"
       }
-    },
-    {
+  },
+  {
       "name": "Keyboard",
       "description": "Mechanical keyboard",
       "price": 200,
       "attributes": {
-        "connection": "wireless",
-        "os": "mac"
+          "connection": "wireless",
+          "os":"mac"
       }
-    },
-    {
-      "name": "Gum",
-      "description": "Chewing Gum",
+  },
+  {
+      "name": "Keyboard",
+      "description": "Mechanical keyboard",
+      "price": 200,
+      "attributes": {
+          "connection": "wireless",
+          "os":"mac"
+      }
+  },
+  {
+      "name": "Keyboard",
+      "description": "Mechanical keyboard",
+      "price": 1200,
+      "attributes": {
+          "connection": "wireless",
+          "os":"windows"
+      }
+  },
+  {
+      "name": "Keyboard",
+      "description": "Gaming keyboard",
+      "price": 150,
+      "attributes": {
+          "connection": "wired",
+          "backlighting": "RGB"
+      }
+  },
+  {
+      "name": "Keyboard",
+      "description": "Membrane keyboard",
+      "price": 50,
+      "attributes": {
+          "connection": "wireless",
+          "backlighting": "none"
+      }
+  },
+  {
+      "name": "Keyboard",
+      "description": "Ergonomic keyboard",
+      "price": 100,
+      "attributes": {
+          "connection": "wired",
+          "backlighting": "single-color"
+      }
+  },
+  {
+      "name": "Mouse",
+      "description": "Wireless mouse",
       "price": 30
-    },
-    {
-      "name": "Gum",
-      "description": "Chewing Gum",
-      "price": 10
-    },
-    {
-      "name": "Gum",
-      "description": "Chewing Gum",
+  },
+  {
+      "name": "Mouse",
+      "description": "Wired mouse",
       "price": 20
-    }
-  ]
-  
+  },
+  {
+      "name": "Mouse",
+      "description": "Gaming mouse",
+      "price": 60
+  },
+  {
+      "name": "Mouse",
+      "description": "Bluetooth mouse",
+      "price": 40
+  },
+  {
+      "name": "Mouse",
+      "description": "Trackball mouse",
+      "price": 50
+  }
+]
